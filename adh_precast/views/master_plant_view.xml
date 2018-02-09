@@ -1,0 +1,58 @@
+<odoo>
+	<data>
+		<record id="view_adhimix_pre_master_plant_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.master.plant.form</field>
+			<field name="model">adhimix.pre.master.plant</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Master Plant">
+					<sheet>
+						<group>
+							<field name="name" required="1"/>
+						</group>
+						<group string="Organisasi">
+							<field name="company_ids" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_pre_master_plant_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.master.plant.tree</field>
+			<field name="model">adhimix.pre.master.plant</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Master Plant">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<!-- Inehrit Res Company -->
+		<record id="view_adh_pre_res_company_inherit_form" model="ir.ui.view">
+	    	<field name="name">adh.res.company.inherit</field>
+	    	<field name="model">res.company</field>
+	    	<field name="type">form</field>
+	    	<field name="inherit_id" ref="base.view_company_form"/>	    	
+	    	<field name="arch" type="xml">
+	    		<field name="partner_id" position="before">
+	    			<field name="kode_company"/>
+	    			<field name="jenis_produk"/>
+	    		</field>
+	    	</field>
+	    </record>
+	    <record id="view_adh_pre_res_company_inherit_tree" model="ir.ui.view">
+	    	<field name="name">adh.res.company.inherit</field>
+	    	<field name="model">res.company</field>
+	    	<field name="type">tree</field>
+	    	<field name="inherit_id" ref="base.view_company_tree"/>	    	
+	    	<field name="arch" type="xml">
+	    		<field name="partner_id" position="before">
+	    			<field name="kode_company"/>
+	    		</field>
+	    	</field>
+	    </record>
+
+	</data>
+</odoo>

@@ -1,0 +1,23 @@
+<odoo>
+	<data>		
+		<record id="view_form_adh_project_inherit" model="ir.ui.view">
+	    	<field name="name">adh.project.inherit</field>
+	    	<field name="model">project.project</field>
+	    	<field name="type">form</field>
+	    	<field name="inherit_id" ref="project.edit_project"/>	    	
+	    	<field name="arch" type="xml">
+	    		<!-- <field name="sequence" position="after">
+	    				<field name="company_id" nolabel="1"/>
+	    		</field> -->
+	    		<xpath expr="//notebook/page[2]" position="after">
+	    			<page string="Daftar Plant">
+	    				<group string="Plant">
+	    					<field name="company_id" nolabel="1"/>
+	    				</group>
+	    			</page>
+	    		</xpath>
+	    	</field>
+	    </record>
+	</data>
+</odoo>
+

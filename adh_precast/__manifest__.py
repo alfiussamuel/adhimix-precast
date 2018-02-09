@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+{
+    'name' : 'ADHIMIX - Precast',    
+    'category': 'Custom',
+    'website': 'https://www.adhimix.co.id',
+    'author' :'PT.WITACO - Samuel',        
+    'depends' : [
+                 'base',
+                 'product',
+                 'mrp',
+                 'report',            
+                ],
+    'data': [
+             'views/product_view.xml',
+             'views/bom_view.xml',
+             'views/pemasaran_view.xml',
+             'views/permintaan_estimasi_view.xml',
+             'views/spp_view.xml',
+             'views/cost_control_view.xml',
+             'views/kontrak_view.xml',        
+             'views/line_view.xml',
+             'views/rencana_produksi_view.xml',             
+             'wizard/permintaan_estimasi_wizard.xml',
+             'wizard/create_rencana_produksi_wizard.xml',
+             'wizard/kontrak_wizard.xml',
+             'wizard/create_spp_wizard.xml',
+             'report/analisa_report.xml',
+             'data/ir_sequence.xml',
+             'data/info_pasar_stage_view.xml',
+             'views/menu.xml',             
+             'views/project_view.xml',
+             'views/realisasi_produksi_view.xml',
+             'views/permintaan_barang_view.xml',
+             'views/master_plant_view.xml',
+             ],
+             
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

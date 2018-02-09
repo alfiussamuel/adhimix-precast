@@ -1,0 +1,59 @@
+<odoo>
+    <data>    	
+       <record id="create_adh_pre_spp_wizard" model="ir.ui.view">
+            <field name="name">Buat SPP</field>
+            <field name="model">adhimix.pre.create.spp.wizard</field>
+            <field name="arch" type="xml">
+                  <form string="Buat SPP">
+                    <group cols="2">    
+                        <group>
+                            <field name="kontrak_id" readonly="1"/>
+                            <field name="nama_proyek_id" readonly="1"/>
+                            <field name="tanggal_pembuatan" readonly="1"/>
+                            <field name="tanggal_kontrak" readonly="1"/>
+                        </group>
+                        <group> 
+                            <field name="plant_id" readonly="1"/>
+                            <field name="plant_produksi_id"/>
+                        </group>
+                    </group>
+                    <notebook>  
+                            <page string="Detail Produk">
+                                <field name="order_lines" nolabel="1" >
+                                    <tree editable="top" create="false">
+                                        <field name="product_id"/>
+                                        <field name="satuan_barang"/>
+                                        <field name="product_qty"/>
+                                        <field name="batas_produksi"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="satuan_barang"/>
+                                            <field name="product_qty"/>
+                                            <field name="batas_produksi"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <!-- <page string="Daftar SPP">
+                                <field name="spp_line_ids" nolabel="1" >
+                                    <tree editable="top" create="false">
+                                        <field name="spp_id"/>
+                                        <field name="plant_id"/>
+                                        <field name="tanggal_pembuatan"/>
+                                    </tree>
+                                </field>
+                            </page> -->
+                        </notebook> 
+                    <footer>
+						<button name="create_buat_spp" string="Buat SPP" type="object" class="oe_highlight"/>
+						                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

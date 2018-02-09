@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+    	
+       <record id="create_permintaaan_estimasi_wizard" model="ir.ui.view">
+            <field name="name">Permintaan Estimasi</field>
+            <field name="model">adhimix.create.permintaan.estimasi</field>
+            <field name="arch" type="xml">
+                <form string="Permintaan Estimasi">
+                	<group cols="2">	
+	                    <group>
+	                		<field name="nama_proyek"/>
+	                    	<field name="product_id"/>
+	                    	<field name="category_id"/>
+	                    	<field name="produk_baru"/>
+	                    	<field name="info_pasar_product_id" invisible="1"/>
+	                		<field name="tanggal_permintaan"/> 
+	                		<field name="tanggal_butuh" required="1"/> 	                		
+	                		<field name="keterangan"/>      
+						</group>
+	                    <group string="Jenis Permintaan"> 
+	                    	<field name="hpp_loko_pabrik"/> 
+	                		<field name="hpp_terkirim"/> 
+	                		<field name="hpp_stressing"/> 
+	                		<field name="hpp_terinstall"/>
+	                		<field name="desain"/> 
+	                		<field name="metode_kerja"/> 
+	                		<field name="shop_drawing"/> 
+						</group>
+					</group>		
+                    <footer>
+						<button name="create_permintaan_estimasi" string="Buat Permintaan Estimasi" type="object" class="oe_highlight"/>
+						                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

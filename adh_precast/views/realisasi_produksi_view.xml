@@ -1,0 +1,48 @@
+<odoo>
+	<data>	    
+		<record id="view_adhimix_pre_realisasi_produksi_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.realisasi.produksi.form</field>
+			<field name="model">adhimix.pre.realisasi.produksi</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Realisasi Produksi">
+					<header>
+						<button name="button_approved" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'Approved')]}" />
+						<field name="state" widget="statusbar" readonly="1"/>
+					</header>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="tanggal_realisasi" class="oe_inline" required="1"/>
+							<field name="company_id" options="{'no_create_edit': True,'no_quick_create': True}" required="1"/>
+							<field name="nama_proyek_id" options="{'no_create_edit': True,'no_quick_create': True}"  required="1"/>
+							<field name="cost_control_id" options="{'no_create_edit': True,'no_quick_create': True}"  required="1"  />
+							<field name="partner_id" class="oe_inline"/>
+							<field name="product_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+							<field name="sisa_rap" class="oe_inline"/>
+							<field name="volume_realisasi" required="1" class="oe_inline"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_pre_realisasi_produksi_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.realisasi.produksi.tree</field>
+			<field name="model">adhimix.pre.realisasi.produksi</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Realisasi Produksi">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="nama_proyek_id"/>
+					<field name="product_id"/>
+					<field name="sisa_rap"/>
+					<field name="volume_realisasi"/>
+				</tree>
+			</field>
+		</record>
+	</data>
+</odoo>
+

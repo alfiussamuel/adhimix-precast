@@ -1,0 +1,216 @@
+ <odoo>
+ 	<data>
+		 <report
+			id="report_analisa_pasar_menu"
+			string="Analisa Pasar"
+			model="adhimix.mrp.info.pasar.line"
+			report_type="qweb-pdf"
+			file="aadhimix.mrp.info.pasar.line"
+			name="adh_mrp_pemasaran.report_analisa_pasar"
+		/>
+		<template id="report_analisa_pasar">
+			<t t-call="report.html_container">				
+				<t t-call="report.internal_layout">
+					<!-- <t t-foreach="docs" t-as="doc"> -->
+						<div class="page">
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td rowspan="2" class="img-responsive" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<img t-if="company_id" t-att-src="'data:image/png;base64,%s' %company_id" style="text-align:center;max-height:100px; max-width:80px;"/>
+										</td>
+										<td colspan="2" rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;">
+											<center><strong>FORM <br/> ANALISA SASARAN PASAR</strong></center>
+										</td>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>No. Dokumen : </strong></center>
+										</td>
+									</tr>
+									<tr>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black; vertical-align:middle;">
+											<center><t t-esc="nomor_dokumen"/></center>
+										</td>
+									</tr>
+									<tr>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Revisi :</strong> </center>
+										</td>
+										<td colspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Tanggal Efektif :<t t-esc="tanggal_efektif"/> </strong></center>
+										</td>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Hal : </strong> </center>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table table-condensed" style="margin-top:-20px">
+								<tr>
+									<td colspan="4" style="border-bottom:1px solid white;border-left:2px solid black;border-right:2px solid black">
+										<!-- kosong -->
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style="border-bottom:1px solid white;border-left:2px solid black;width:10px">
+										<strong>Nama Pelanggan</strong>
+									</td>
+									<td style="border-bottom:1px solid white;">
+										:
+									</td>
+									<td style="border-bottom:1px solid white;border-right:2px solid black">
+										<t t-esc="nama_pelanggan"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style="border-bottom:1px solid white;border-left:2px solid black;width:10px">
+										<strong>Nama Spesifikasi/Produk</strong>
+									</td>
+									<td style="border-bottom:1px solid white;">
+										:
+									</td>
+									<td style="border-bottom:1px solid white;border-right:2px solid black">
+										<t t-esc="nama_spesifikasi"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4" style="border-bottom:1px solid white;border-left:2px solid black;border-right:2px solid black">
+										<!-- kosong -->
+									</td>
+								</tr>
+							</table>
+							<table class="table table-bordered" style="margin-top:-20px">
+								<tr>
+									<td rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>No</strong></center>
+									</td>
+									<td rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Uraian</strong></center>
+									</td>
+									<td rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Parameter</strong></center>
+									</td>
+									<td rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Analisa</strong></center>
+									</td>
+									<td  colspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Keputusan</strong></center>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Ya</strong></center>
+									</td>
+									<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;background-color:#C0C0C0">
+										<center><strong>Tidak</strong></center>
+									</td>
+								</tr>
+								<tr>
+									<td rowspan="2" style="border-top:1px solid black;border-left:2px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><strong>1</strong></center>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<strong>Hal-hal Khusus Permintaan <br/> Pelanggan</strong>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										Spesifikasi Bahan = <t t-esc="spesifikasi_bahan"/>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<t t-esc="analisa_hal2"/>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><t t-if="keputusan_akhir_hal2=='Ya'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:2px solid black;">
+										<center><t t-if="keputusan_akhir_hal2=='Tidak'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										Desain Produk = <t t-esc="desain_produk"/>
+									</td>
+								</tr>
+								<tr>
+									<td rowspan="2" style="border-top:1px solid black;border-left:2px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><strong>2</strong></center>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<strong>Perbandingan Waktu Kebutuhan <br/> Produk dengan Kapasitas Produksi</strong>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										Kapasitas Produksi = <t t-esc="kapasitas_produksi"/>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<t t-esc="analisa_perbandingan"/>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><t t-if="keputusan_akhir_perbandingan=='Ya'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:2px solid black;">
+										<center><t t-if="keputusan_akhir_perbandingan=='Tidak'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										Sisa kapasitas = <t t-esc="sisa_kapasitas"/>
+									</td>
+								</tr>
+								<tr>
+									<td  style="border-top:1px solid black;border-left:2px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><strong>3</strong></center>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<strong>Status Pembayaran Pelanggan</strong>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										Status = <t t-esc="status"/>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<t t-esc="analisa_status"/>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:1px solid black;">
+										<center><t t-if="keputusan_status=='Ya'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-right:2px solid black;">
+										<center><t t-if="keputusan_status=='Tidak'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+										<center>KEPUTUSAN AKHIR</center>
+									</td>
+									<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+										<center><t t-if="keputusan_akhir=='Ya'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+									<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+										<center><t t-if="keputusan_akhir=='Tidak'"><input type="checkbox" checked="True"/></t></center>
+									</td>
+								</tr>
+							</table>
+							<table class="table">
+								<tr>
+									<td colspan="2" style="text-align:right;border-top:1px solid white">
+										<p>.............,...............</p>
+									</td>
+								</tr>
+								<tr>
+									<center>
+										<td style="text-align:left;border-top:1px solid white">
+											<p style="height:2cm">Disetujui Oleh,</p>
+											<p>(......................)</p>
+											<p>Spv Engineering</p>
+										</td>									
+										<td style="text-align:right;border-top:1px solid white">
+											<!-- <p>.............,..............</p> -->
+											<p style=";height:2cm">Dibuat Oleh,</p>
+											<p>(......................)</p>
+											<p>Staf Engineering</p>
+										</td>
+									</center>
+								</tr>
+							</table>
+						</div>
+					</t>
+				</t>
+			</template>
+	</data>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+	<data>
+		 <record id="create_adh_mrp_kontrak_wizard" model="ir.ui.view">
+            <field name="name">adhimix.mrp.kontrak.wizard</field>
+            <field name="model">adhimix.mrp.kontrak.wizard</field>
+            <field name="arch" type="xml">
+                <form string="BA &#38; Negosiasi">
+                	<sheet>
+	                	<group cols="2">	
+		                    <group>	                		
+		                    	<!-- <field name="name" readonly="1"/> -->
+								<field name="nama_pelanggan" readonly="1"/>
+								<field name="sale_id" readonly="1"/>								
+								<field name="tanggal" readonly="1"/>
+								<field name="company_id"/>	
+								<field name="spesifikasi"/>
+								<field name="scope_pekerjaan_owner"/>												
+								<field name="pekerjaan"/>
+								<field name="lokasi"/>
+								<label for="waktu_pelaksanaan"/>
+								<div>
+									<field name="waktu_pelaksanaan" class="oe_inline"/> - <field name="waktu_pelaksanaan_end"/>									
+								</div>								
+								<field name="harga_negosiasi"/>
+								<field name="cara_pembayaran_id"/>							
+								<field name="scope_pekerjaan_client"/>
+								<field name="lampiran" widget="many2many_binary"/>	
+							</group>
+						</group>
+						</sheet>
+                    <footer>
+						<button name="create_berita_acara" string="Buat Berita Acara" type="object" class="oe_highlight"/>
+						or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

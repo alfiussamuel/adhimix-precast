@@ -1,0 +1,26 @@
+<odoo>
+    <data noupdate="1">
+            
+            
+            <record id="info_pasar_stage_new" model="adhimix.pre.info.pasar.stage">
+                <field name="name">New</field>
+            </record>          
+            
+            <record id="info_pasar_stage_info_pasar" model="adhimix.pre.info.pasar.stage">
+                <field name="name">Info Pasar</field>
+            </record>
+            
+            <record id="info_pasar_stage_analisa_pasar" model="adhimix.pre.info.pasar.stage">
+                <field name="name">Analisa Pasar</field>
+            </record>
+
+            <record id="info_pasar_stage_target_pasar" model="adhimix.pre.info.pasar.stage">
+                <field name="name">Target Pasar</field>
+            </record>
+            
+           <!--  <record id="crm_stage_kontrak" model="crm.stage">
+                <field name="name">Kontrak</field>
+            </record> -->
+
+    </data>
+</odoo>

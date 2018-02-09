@@ -1,0 +1,53 @@
+<odoo>
+	<data>	    
+		<record id="view_adhimix_pre_permintaan_barangf_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.permintaan.barang.form</field>
+			<field name="model">adhimix.pre.permintaan.barang</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Permintaan Barang">
+					<header>
+						<field name="state" widget="statusbar" readonly="1"/>
+					</header>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="tanggal_permintaan" class="oe_inline" required="1"/>
+							<field name="company_id" options="{'no_create_edit': True,'no_quick_create': True}" required="1"/>
+							<field name="nama_proyek_id" options="{'no_create_edit': True,'no_quick_create': True}"  required="1"/>
+							<field name="cost_control_id" options="{'no_create_edit': True,'no_quick_create': True}"  required="1"  />
+						</group>
+						<group>
+							<notebook>
+								<page string="Detail Produk">
+									<group>
+										<field name="product_line" nolabel="1">
+											<tree editable="top">
+												<field name="product_id"/>
+												<field name="product_qty"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_pre_permintaan_barangf_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.permintaan.barang.tree</field>
+			<field name="model">adhimix.pre.permintaan.barang</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="nama_proyek_id"/>
+				</tree>
+			</field>
+		</record>
+	</data>
+</odoo>

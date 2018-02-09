@@ -1,0 +1,538 @@
+<odoo>
+	<data>
+		
+		<record id="view_order_form_adhimix_mrp_kontrak" model="ir.ui.view">
+	    	<field name="name">Sales Order</field>
+	    	<field name="model">sale.order</field>
+	    	<field name="type">form</field>
+	    	<field name="inherit_id" ref="sale.view_order_form"/>	    	
+	    	<field name="arch" type="xml">
+	    		<field name="partner_id" position="after">
+	    			<field name="kontrak_id" readonly="1" attrs="{'invisible': [('kontrak_id', '=', False)]}"/>
+	    			<field name="spp_id" readonly="1" attrs="{'invisible': [('kontrak_id', '=', False)]}"/>
+	    		</field>
+	    	<!-- 	<xpath expr="/form/sheet/notebook/page[2]" position="after">
+	                <page string="Negosiasi" attrs="{'invisible': [('state', '!=', 'draft')]}">
+	              		 <field name="negosiasi_line_ids" domain="[('is_negosiasi','=',True)]">
+	              		 	<tree>
+			                    <field name="nomor_negosiasi" />
+	                   			<field name="date_order" string="Tanggal Negosiasi" />
+			                    <field name="pic"/>
+			                    <field name="status_negosiasi"/>
+			                </tree>
+		                </field>
+			        </page>
+	            </xpath>    -->
+	            <xpath expr="/form/sheet/notebook/page[2]" position="after">
+	        		<page string="Kondisi Penawaran">
+						<group>
+							<field name="kondisi_penawaran_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="uraian_id"/>
+								</tree>
+							</field>
+						</group>
+					</page>
+					<page string="Negosiasi" attrs="{'invisible': [('state', '!=', 'draft')]}">
+	              		 <field name="negosiasi_line_ids">
+	              		 	<tree>
+	              		 		<field name="penawaran_id" invisible="1"/>
+			                    <field name="nomor_negosiasi" />
+	                   			<!-- <field name="date_order" string="Tanggal Negosiasi" /> -->
+			                    <field name="pic"/>
+			                    <field name="status_negosiasi" invisible="1"/>
+			                    <button name="action_nego_line" string="Lihat Negosiasi" type="object" />
+			                </tree>
+		                </field>
+			        </page>
+				</xpath>
+				<!-- Sequence -->
+				<field name="name" position="replace">
+		    		<field name="nomor_penawaran" attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+		    	</field>
+		    	<field name="nomor_penawaran" position="after">
+		    		<field name="nomor_negosiasi" attrs="{'invisible':['|',('state','!=','sent'),('is_negosiasi', '!=', True)]}" />
+		    	</field>
+		    	<field name="nomor_negosiasi" position="after">
+		    		<field name="name" attrs="{'invisible':[('state', '!=', 'sale')]}" />
+		    	</field>
+		    	<div name="button_box" position="inside">
+		    		<button class="oe_stat_button" name="list_negosiasi" type="object" icon="fa-files-o" attrs="{'invisible':[('state', '!=', 'draft')]}">
+                        <field string="Negosiasi" name="persentase_negosiasi" widget="statinfo"  />
+                    </button>
+                </div>		    	
+	            <field name="state" widget="statusbar" status_visible="draft,sent,sale"/>		    	
+	    		<field name="payment_term_id" position="after">
+	    			<field name="pic" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}"/>
+	    			<!-- <field name="company_id"/> -->
+	    			<field name="template_biaya_id" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}"/>	    			
+	    		</field>
+	    		<field name="partner_id" position="after">
+	        		<field name="is_negosiasi" invisible="1"/>
+	        		<field name="nama_proyek" attrs="{'invisible':[('state', 'in', 'sale','done','cancel')]}"/>
+	        		<field name="nama_proyek_id" attrs="{'required':[('state', '=', 'sent')]}"/>
+	          		<field name="info_pasar_id"/>
+	          	</field>
+	          	<field name="partner_id" position="attributes">
+	    			<attribute name="partner_id" attrs="{'required','=',False}"></attribute>
+	    		</field>
+	    		<field name="validity_date" position="attributes">
+	    			<attribute name="string">Tanggal Akhir Kontrak</attribute>
+	    		</field>
+
+	    		<button name="action_confirm" position="after">
+	    			<!-- <button name="action_bom" type="object" string="Load BOM" class="oe_highlight" states="draft"/> -->
+	    			<!-- <button name="button_evaluasi" string="Evaluasi Penawaran"  type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'sent')]}" /> -->
+	    			<button name="button_negosiasi" string="Negosiasi"  type="object" class="oe_highlight" attrs="{'invisible':[('state', 'not in', 'draft')]}"/>
+	    			<!-- <button name="button_berita_acara" string="Buat Berita Acara"  type="object" class="oe_highlight"/> -->
+	    			<button name="action_spp" string="Buat SPP"  type="object" class="oe_highlight" states="sale"/>
+	    		</button>	    			    		
+	    		<group name="sale_total" position="replace">
+	    			<group name="sale_total">	    				
+		    			<group class="oe_subtotal_footer oe_right" name="sale_total">
+		    				<field name="total_hpp"/>
+			    			<field name="total_biaya_langsung"/>	 
+			    			<field name="grand_total_biaya"/>
+			    			<field name="total_penjualan"/>			    				                      
+		                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+		                        <label for="total_profit" />		                        
+		                    </div>
+		                    <field name="total_profit" nolabel="1" class="oe_subtotal_footer_separator"/>
+		                    <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}" string="Total Penjualan"/>	                    
+		                    <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+		                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+		                        <label for="amount_total" />
+		                        <button name="button_dummy"
+		                            states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+		                    </div>
+		                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+		                </group>
+	    			</group>	    			
+	    		</group>	    		
+	        	<field name="order_line" position="replace">
+	        		<field name="list_biaya" nolabel="1" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}">
+						<tree editable="top">
+							<field name="nama_biaya" required="1"/>
+							<field name="jenis_biaya" required="1"/>
+							<field name="nilai_biaya" required="1"/>
+							<field name="total_biaya" required="1" sum="Subtotal"/>
+						</tree>
+					</field>
+	          		<field name="order_line" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}">
+	                    <form string="Sales Order Lines">
+	                        <group>
+	                            <group>
+	                                <field name="product_id" string="Nama Produk"
+	                                    context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+	                                    attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
+	                                   />
+	                                <field name="bom_id"/>
+	                                <field name="total_hpp"/>	                                
+	                                <field name="total_biaya"/>
+	                                <field name="total_biaya_sales"/>
+	                                <field name="total_biaya_hpp"/>
+	                                <field name="layout_category_id" groups="sale.group_sale_layout"/>
+	                                <field name="invoice_status" invisible="1"/>
+	                                <field name="qty_to_invoice" invisible="1"/>
+	                                <field name="qty_delivered_updateable" invisible="1"/>
+	                                <field name="procurement_ids" invisible="1"/>
+	                                <field name="price_subtotal" invisible="1"/>
+	                                <label for="qty_delivered" string="Delivered Quantity" invisible="1"/>
+	                                <div invisible="context.get('hide_sale')">
+	                                    <field name="qty_delivered" attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}" invisible="1"/>
+	                                </div>
+	                                <label for="qty_invoiced" string="Invoiced Quantity" invisible="1"/>
+	                                <div invisible="context.get('hide_sale')">
+	                                    <field name="qty_invoiced" invisible="1"/>
+	                                </div>
+	                            </group>
+	                            <group>
+	                            	<field name="jenis_produk"/>
+	                                <field name="organisasi"/>
+	                                <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+	                                    attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}" string="Pajak"/>
+	                                <field name="is_margin"/>
+	                                <field name="nilai_margin" attrs="{'invisible': [('is_margin', '=', False)]}"/>	                                
+	                                <field name="price_unit" string="Harga Satuan"/>
+	                                <field name="total_margin" attrs="{'invisible': [('is_margin', '=', True)]}"/>
+	                                <field name="total_profit"/>
+	                                 <field name="cost_control_id" attrs="{'invisible':[('state', '!=','sale')]}"/>
+	                                <label for="discount" groups="sale.group_discount_per_so_line" string="Disc(%)"/>
+	                                <div name="discount" groups="sale.group_discount_per_so_line">
+	                                    <field name="discount" class="oe_inline"/> %%
+	                                </div>
+	                                <label for="customer_lead" invisible="1"/>
+	                                <div invisible="1">
+	                                    <field name="customer_lead" class="oe_inline"/> days
+	                                </div>
+	                                <label for="analytic_tag_ids" invisible="1"/>
+	                                <div invisible="1">
+	                                    <field name="analytic_tag_ids" widget="many2many_tags"/>
+	                                </div>
+	                               
+	                            </group>
+	                            <group string="Volume">
+	                            	<label for="product_uom_qty" string="Volume Kontrak"/>
+	                                <div>
+	                                    <field
+	                                        context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': parent.company_id}"
+	                                        name="product_uom_qty" class="oe_inline"/>
+	                                    <field name="product_uom" groups="product.group_uom" class="oe_inline oe_no_button"
+	                                        attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"/>
+	                                </div>
+	                               	<field name="volume_produksi" readonly="1"/>
+	                                <field name="volume_kirim" readonly="1"/>
+	                                <field name="volume_stressing" readonly="1"/>
+	                                <field name="volume_install" readonly="1"/>
+	                                <field name="volume_spp" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+	                               	<field name="batas_produksi" invisible="1"/>
+	                           </group>
+	                           <group string="Persentase">
+		                           	<field name="persentase_produksi"/>
+		                           	<field name="persentase_kirim"/>
+		                           	<field name="persentase_install"/>
+		                           	<field name="persentase_stressing"/>
+	                           </group>
+	                           <group string="Detail BOM">
+	                           		<field name="is_produksi"/>
+	                                <field name="is_pengiriman"/>
+	                           		<field name="is_stressing"/>
+	                                <field name="is_install"/>
+		                        </group>	                                
+	                        </group>
+	                        <label for="name" invisible="1"/>
+	                        <field name="name" invisible="1"/>
+	                        <notebook>
+	                            <page string="Komponen BOM" attrs="{'invisible':[('is_produksi', '=', False)]}">
+		                            <field name="bom_list" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}">
+		                            	<tree editable="top" create="false" delete="false">
+		                            		<field name="product_id" readonly="1"/>
+		                            		<field name="satuan_barang" readonly="1"/>
+		                            		<field name="qty" readonly="1"/>
+		                            		<field name="price_unit"/>
+		                            		<field name="price_subtotal" sum="Sub Total"/>
+		                            	</tree>
+		                            </field>
+		                        </page>
+		                        <page string="Pengiriman" attrs="{'invisible':[('is_pengiriman', '=', False)]}">
+				    				<field name="pengiriman_list_ids" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}">
+				    					<tree editable="top" >
+				    						<field name="product_id"/>
+				    						<field name="product_qty"/>
+				    						<field name="price_unit"/>
+				    						<field name="koefisien"/>
+				    						<field name="total"/>
+				    						<field name="total_harga" sum="Sub Total"/>
+				    					</tree>
+				    				</field>
+				    			</page>
+				    			<page string="Stressing" attrs="{'invisible':[('is_stressing', '=', False)]}">
+				    				<field name="stressing_list_ids" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}" >
+				    					<tree editable="top" >
+				    						<field name="product_id"/>
+				    						<field name="product_qty"/>
+				    						<field name="price_unit"/>
+				    						<field name="koefisien"/>
+				    						<field name="total"/>
+				    						<field name="total_harga" sum="Sub Total"/>
+				    					</tree>
+				    				</field>
+				    			</page>
+				    			<page string="Install" attrs="{'invisible':[('is_install', '=', False)]}">
+				    				<field name="install_list_ids" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}" >
+				    					<tree editable="top" >
+				    						<field name="product_id"/>
+				    						<field name="product_qty"/>
+				    						<field name="price_unit"/>
+				    						<field name="koefisien"/>
+				    						<field name="total"/>
+				    						<field name="total_harga" sum="Total Install"/>
+				    					</tree>
+				    				</field>
+				    			</page>
+				    			 <page string="Daftar SPP">
+                                <field name="spp_lines" nolabel="1" >
+                                    <tree editable="top" create="false">
+                                        <field name="spp_id"/>
+                                        <field name="plant_id"/>
+                                        <field name="tanggal_pembuatan"/>
+                                    </tree>
+                                </field>
+                            </page>
+		                    </notebook>
+	                        <div>
+	                            <label for="cost_list"/>
+	                            <field name="cost_list" attrs="{'readonly': [('state', 'in', ('sale','done','cancel'))]}">
+	                            	<tree editable="top">
+	                            		<field name="nama_biaya"/>
+	                            		<field name="nilai_biaya" sum="Total Biaya"/>	                            		
+	                            	</tree>
+	                            </field>
+	                        </div>
+	                        <field name="state" invisible="1"/>
+	                    </form>
+	                    <tree string="Sales Order Lines" decoration-info="invoice_status=='to invoice'">
+	                        <field name="sequence" widget="handle"/>
+	                        <field name="product_id" string="Nama Produk"
+	                            attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
+	                            context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+	                           />
+	                        <field name="layout_category_id" groups="sale.group_sale_layout"/>
+	                        <field name="name" invisible="1"/>
+	                        <field name="product_uom_qty" string="Volume"	                            
+	                            context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+	                        />
+	                        <field name="qty_delivered" attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}" invisible="1"/>
+	                        <field name="qty_invoiced" invisible="1"/>
+	                        <field name="qty_to_invoice" invisible="1"/>
+	                        <field name="product_uom" string="Satuan"
+	                            attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"
+	                            context="{'company_id': parent.company_id}"
+	                            groups="product.group_uom" options='{"no_open": True}'/>
+	                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
+	                        <field name="price_unit" string="Harga Satuan"
+	                            attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+	                        <field name="total_biaya_hpp"/>
+	                        <field name="total_margin"/>
+	                        <field name="total_profit"/>	                        
+	                        <field name="tax_id" string="Pajak" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+	                            attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+	                        <field name="discount" groups="sale.group_discount_per_so_line" string="Disc(%)"/>
+	                        <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal" sum="Subtotal"/>
+	                        <field name="price_total" widget="monetary" groups="sale.group_show_price_total" sum="Subtotal"/>
+	                        <field name="qty_delivered_updateable" invisible="1"/>
+	                        <field name="procurement_ids" invisible="1"/>
+	                        <field name="state" invisible="1"/>
+	                        <field name="invoice_status" invisible="1"/>
+	                        <field name="customer_lead" invisible="1"/>
+	                    </tree>
+	                    <kanban class="o_kanban_mobile">
+	                        <field name="product_id"/>
+	                        <field name="product_uom_qty"/>
+	                        <field name="product_uom" groups="product.group_uom"/>
+	                        <field name="price_subtotal"/>
+	                        <templates>
+	                            <t t-name="kanban-box">
+	                                <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+	                                    <div class="row">
+	                                        <div class="col-xs-12">
+	                                            <strong><span><t t-esc="record.product_id.value"/></span></strong>
+	                                        </div>
+	                                    </div>
+	                                    <div class="row">
+	                                        <div class="col-xs-8 text-muted">
+	                                            <span><t t-esc="record.product_uom_qty.value"/> <t t-esc="record.product_uom.value"/></span>
+	                                        </div>
+	                                        <div class="col-xs-4 text-muted">
+	                                            <span class="pull-right text-right"><t t-esc="record.price_subtotal.value"/></span>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </t>
+	                        </templates>
+	                    </kanban>
+	                </field>	                
+	        	</field>	        	
+	      	</field>
+	    </record>
+	    <!-- tree negosiasi -->
+	    <record id="view_negosiasi_tree" model="ir.ui.view">
+	        <field name="name">view.negosiasi.tree</field>
+	        <field name="model">sale.order</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="8"/>
+	        <field name="arch" type="xml">
+	          <tree>
+		            <field name="nomor_negosiasi" />
+		            <!-- <field name="date_order" string="Tanggal Negosiasi"/> -->
+	                <field name="pic"/>
+	                <!-- <field name="partner_id"/> -->
+	                <field name="amount_total" sum="Total Tax Included"/>
+	          </tree>
+	        </field>
+	    </record>
+
+
+	    <!-- Menu Berita Acara & Negosiasi -->
+		<!-- <record id="view_adhimix_mrp_kontrak_form" model="ir.ui.view">
+			<field name="name">adhimix.mrp.kontrak.form</field>
+			<field name="model">adhimix.mrp.kontrak</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Berita Acara Klarifikasi &#38; Negosiasi"> 
+					<sheet>
+						<group>
+							<field name="name" readonly="1"/>
+							<field name="nama_pelanggan" readonly="1"/>
+							<field name="sale_id" readonly="1"/>								
+							<field name="tanggal" readonly="1"/>
+							<field name="company_id"/>	
+							<field name="spesifikasi"/>
+							<field name="scope_pekerjaan_owner"/>												
+							<field name="pekerjaan"/>
+							<field name="lokasi"/>
+							<label for="waktu_pelaksanaan"/>
+							<div>
+								<field name="waktu_pelaksanaan" class="oe_inline"/> - <field name="waktu_pelaksanaan_end"/>									
+							</div>								
+							<field name="harga_negosiasi"/>
+							<field name="cara_pembayaran_id"/>							
+							<field name="scope_pekerjaan_client"/>
+							<field name="lampiran" widget="many2many_binary"/>	
+						</group>
+						<notebook>
+							<page string="List Product">
+								<field name="product_ids" nolabel="1" readonly="1">
+									<tree>
+										<field name="product_id"/>
+	                            		<field name="satuan_barang"/>
+	                            		<field name="qty"/>
+	                            		<field name="price_unit"/>
+									</tree>
+									<form>
+										<group>
+											<group>
+												<field name="product_id"/>
+	                            				<field name="satuan_barang"/>	                            		
+											</group>
+											<group>
+												<field name="qty"/>
+	                            				<field name="price_unit"/>	
+											</group>
+										</group>
+										<group string="Detail BOM">
+											<field name="bom_ids" nolabel="1" readonly="1">
+												<tree editable="top" create="false" delete="false">
+													<field name="product_id" readonly="1"/>
+		                            				<field name="satuan_barang" readonly="1"/>
+		                            				<field name="qty" readonly="1"/>
+		                            				<field name="price_unit"/>
+		                            				<field name="price_subtotal" sum="Total Nilai"/>
+												</tree>
+											</field>
+										</group>										
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_mrp_kontrak_tree" model="ir.ui.view">
+			<field name="name">adhimix.mrp.kontrak.tree</field>
+			<field name="model">adhimix.mrp.kontrak</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Berita Acara Klarifikasi &#38; Negosiasi">
+					<field name="name"/>
+					<field name="sale_id"/>
+					<field name="tanggal"/>
+					<field name="nama_pelanggan"/>	
+					<field name="pekerjaan"/>
+					<field name="lokasi"/>
+					<field name="waktu_pelaksanaan"/>
+					<field name="harga_negosiasi"/>
+					<field name="cara_pembayaran_id"/>	
+				</tree>
+			</field>
+		</record> -->
+
+		
+		<!-- Penawaran -->
+		 <record model="ir.ui.menu" id="sale.menu_sale_quotations">
+        	<field name="name">Penawaran</field>
+      	</record>
+      	<record model="ir.actions.act_window" id="sale.action_quotations">
+        	<field name="name">Penawaran</field>
+      	</record>
+      	<record model="ir.ui.view" id="view_nomor_penawaran">
+		    <field name="name">nomor.penawaran.inherit</field>           
+		    <field name="model">sale.order</field>                                  
+		    <field name="inherit_id" ref="sale.view_quotation_tree"/>
+		    <field name="arch" type="xml">
+		    	<field name="name" position="replace">
+		    		<field name="nomor_penawaran" />
+		    	</field>
+		    </field>
+		</record>
+      	<menuitem
+            id="sale.menu_sale_quotations"
+            name="Penawaran"
+            parent="sales_team.menu_sales"
+            sequence="9"/>
+
+		<!-- Inherit in Search Quotation View -->
+		<record id="view_sale_order_inherit_search" model="ir.ui.view">
+			<field name="name">sale.order.search.expand.filter</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+			<field name="arch" type="xml">
+			    <field name="name" position="after">
+			        <!-- <filter name="group_state" string="Status" icon="terp-go-month" domain="[]" context="{'group_by':'state'}"/> -->
+			        <filter string="Penawaran" name="state_draft" domain="[('state','=','draft')]"/>
+			    </field>
+			</field>
+		</record>
+
+	    <record model="ir.actions.act_window" id="sale.action_quotations">
+	        <field name="context">{'search_default_state_draft':1}</field>
+	    </record>
+            
+     
+		 <!-- Inherit in Search Negosiasi View -->
+		<record id="view_negosiasi_inherit_search" model="ir.ui.view">
+	        <field name="name">sale.order.search.expand.negosiasi.filter</field>
+	        <field name="model">sale.order</field>
+	        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+	        <field name="arch" type="xml">
+	            <field name="name" position="after">
+	                <!-- <filter name="group_state" string="Status" icon="terp-go-month" domain="[]" context="{'group_by':'state'}"/> -->
+	                <filter string="Negosiasi" name="state_negosiasi" domain="[('state','=','sent')]"/>
+	            </field>
+	        </field>
+    	</record>
+
+		
+		<!-- Template Biaya -->
+		<record id="view_adhimix_template_biaya_form" model="ir.ui.view">
+			<field name="name">adhimix.template.biaya.form</field>
+			<field name="model">adhimix.template.biaya</field>
+			<field name="type">form</field>			
+			<field name="arch" type="xml">
+				<form string="Template Biaya"> 
+					<sheet>
+						<group>
+							<field name="name"/>
+						</group>
+						<notebook>
+							<page string="List Biaya">
+								<field name="list_biaya" nolabel="1">
+									<tree editable="top">
+										<field name="biaya_id"/>
+	                            		<field name="nilai_biaya"/>
+	                            		<field name="jenis_biaya"/>	                            		
+									</tree>									
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_adhimix_template_biaya_tree" model="ir.ui.view">
+			<field name="name">adhimix.template.biaya.tree</field>
+			<field name="model">adhimix.template.biaya</field>
+			<field name="type">tree</field>			
+			<field name="arch" type="xml">
+				<tree string="Template Biaya">
+					<field name="name"/>					
+				</tree>
+			</field>
+		</record>
+		 
+	</data>
+</odoo>

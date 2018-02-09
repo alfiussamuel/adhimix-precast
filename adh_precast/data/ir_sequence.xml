@@ -1,0 +1,93 @@
+<odoo>
+	<data>				
+		
+		<!-- Rencana Produksi -->
+		<record id="seq_adhimix_pre_rencana_produksi" model="ir.sequence">  
+          <field name="name">Adhimix Precast Rencana Produksi</field>  
+          <field name="code">adhimix.pre.rencana.produksi</field>  
+          <field name="prefix">RP-</field>  
+          <field name="padding">4</field>  
+          <field eval="1" name="number_increment"/>  
+        </record>
+        <!--Permintaan Barang -->
+		<record id="seq_adhimix_pre_permintaan_barang" model="ir.sequence">  
+          <field name="name">Adhimix Precast Permintaan Barang</field>  
+          <field name="code">adhimix.pre.permintaan.barang</field>  
+          <field name="prefix">PB-</field>  
+          <field name="padding">4</field>  
+          <field eval="1" name="number_increment"/>  
+        </record>
+        <!-- Realisasi Produksi -->
+		<record id="seq_adhimix_pre_realisasi_produksi" model="ir.sequence">  
+          <field name="name">Adhimix Precast Realisai Produksi</field>  
+          <field name="code">adhimix.pre.realisasi.produksi</field>  
+          <field name="prefix">REALP-</field>  
+          <field name="padding">4</field>  
+          <field eval="1" name="number_increment"/>  
+        </record>
+        		
+		<!-- Line Produksi -->
+		<record id="seq_adhimix_pre_line" model="ir.sequence">  
+          <field name="name">Adhimix Precast Line</field>  
+          <field name="code">adhimix.pre.line</field>  
+          <field name="prefix">LINE-</field>  
+          <field name="padding">4</field>  
+          <field eval="1" name="number_increment"/>  
+        </record>
+        		
+		<!-- Kontrak  -->
+		  <record id="seq_adhimix_mrp_kontrak" model="ir.sequence">  
+			<field name="name">Adhimix Kontrak</field>  
+			<field name="code">adhimix.mrp.kontrak</field>  
+			<field name="prefix">KONTRAK/%(month)s/%(year)s/</field>  
+			<field name="padding">3</field>  
+			<field eval="1" name="number_increment"/>  
+		</record>
+						
+		<!-- Cost Control -->
+		<record id="seq_adhimix_pre_cost_control" model="ir.sequence">  
+			<field name="name">Adhimix Cost Control</field>  
+			<field name="code">adhimix.pre.cost.control</field>  
+			<field name="prefix">CC/%(month)s/%(year)s/</field>  
+			<field name="padding">3</field>  
+			<field eval="1" name="number_increment"/>  
+		</record>
+		
+		<!-- Cost Control Line -->
+		<record id="seq_adhimix_pre_cost_control_line" model="ir.sequence">  
+			<field name="name">Adhimix Cost Control Line</field>  
+			<field name="code">adhimix.pre.cost.control.line</field>  
+			<field name="prefix">CCL/%(month)s/%(year)s/</field>  
+			<field name="padding">3</field>  
+			<field eval="1" name="number_increment"/>  
+		</record>
+				
+		<!-- Info Pasar -->
+		<record id="seq_adhimix_pre_info_pasar" model="ir.sequence">  
+			<field name="name">Adhimix Info Pasar</field>  
+			<field name="code">adhimix.pre.info.pasar</field>  
+			<field name="prefix">IPR/API-PRE/%(month)s-%(year)s/</field>  
+			<field name="padding">4</field>  
+			<field eval="1" name="number_increment"/>  
+		</record> 
+
+		<!-- Permintaan Estimasi  -->
+		<record id="seq_adhimix_pre_permintaan_estimasi" model="ir.sequence">  
+			<field name="name">Adhimix Permintaan Estimasi</field>  
+			<field name="code">adhimix.pre.permintaan.estimasi</field>  
+			<field name="prefix">PES/PCT/%(month)s-%(year)s/</field>  
+			<field name="padding">4</field>  
+			<field eval="1" name="number_increment"/>  
+		</record>
+		
+		<!-- SPP -->
+		<record id="seq_adhimix_pre_spp" model="ir.sequence">  
+			<field name="name">Adhimix Surat Perintah Produksi</field>  
+			<field name="code">adhimix.pre.spp</field>  
+			<field name="prefix">SPP-</field>  
+			<field name="padding">4</field>  
+			<field eval="1" name="number_increment"/>  
+		</record>    
+				
+	</data>
+</odoo>

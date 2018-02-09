@@ -1,0 +1,105 @@
+<odoo>
+	<data>
+
+		<record id="view_adhimix_pre_rencana_produksi_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.rencana.produksi.form</field>
+			<field name="model">adhimix.pre.rencana.produksi</field>
+			<field name="type">form</field>			
+			<field name="arch" type="xml">
+				<form string="Rencana Produksi">
+					<header>
+						<button name="button_buat_rencana" string="Buat Rencana" type="object" class="oe_highlight"/>
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" readonly="1"/>
+								<field name="company_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="nama_proyek_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="cost_control_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="line_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="kapasitas_produksi"/>
+							</group>
+							<group>								
+								<field name="product_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="sisa_rap"/>								
+								<field name="total_rencana" readonly="1"/>
+							</group>
+						</group>										
+						<group>
+							<notebook>
+								<page string="Daftar Rencana">
+									<group>
+										<field name="plan_list_ids" nolabel="1">
+											<tree string="Daftar Rencana" editable="top">
+												<field name="date"/>
+												<field name="product_id"/>
+												<field name="volume"/>
+												<field name="nama_proyek_id" invisible="1"/>
+												<field name="line_id" invisible="1"/>
+												<field name="company_id" invisible="1"/>
+												<field name="jenis_produk" invisible="1"/>												
+											</tree>
+										</field>
+									</group>
+								</page>								
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_pre_rencana_produksi_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.rencana.produksi.tree</field>
+			<field name="model">adhimix.pre.rencana.produksi</field>
+			<field name="type">tree</field>			
+			<field name="arch" type="xml">
+				<tree string="Rencana Produksi">
+					<field name="name"/>
+					<field name="cost_control_id"/>
+					<field name="nama_proyek_id"/>					
+					<field name="product_id"/>
+					<field name="line_id"/>					
+				</tree>
+			</field>
+		</record>
+		
+
+		<!-- calendar rencana produksi-->
+        <record id="rencana_cal" model="ir.ui.view">
+            <field name="name">rencana.calendar</field>
+            <field name="model">adhimix.pre.rencana.produksi.plan</field>
+            <field name="arch" type="xml">
+                <calendar string="Rencana Produksi" date_start="date" color="line_id">
+                    <field name="line_id" />
+                    <field name="product_id" />
+                    <field name="volume"/>						
+                </calendar>
+            </field>
+        </record>
+        <record id="view_adhimix_pre_rencana_produksi_plan_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.rencana.produksi.plan.tree</field>
+			<field name="model">adhimix.pre.rencana.produksi.plan</field>
+			<field name="type">tree</field>			
+			<field name="arch" type="xml">
+				<tree string="Rencana Produksi">
+					<field name="date"/>
+					<field name="product_id"/>
+					<field name="volume"/>
+					<field name="nama_proyek_id" invisible="1"/>
+					<field name="line_id" invisible="1"/>
+					<field name="company_id" invisible="1"/>
+					<field name="jenis_produk" invisible="1"/>			
+				</tree>
+			</field>
+		</record>
+        <record model="ir.actions.act_window" id="act_rencana_produksi_calendar">
+			<field name="name">adhimix.pre.rencana.produksi.calendar</field>
+			<field name="res_model">adhimix.pre.rencana.produksi.plan</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">calendar</field>
+			<field name="view_id" ref="rencana_cal"/>
+		</record>		
+
+	</data>
+</odoo>

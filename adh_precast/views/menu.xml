@@ -1,0 +1,237 @@
+<odoo>
+	<data>
+		<!-- Manu Master Plant -->
+		<record id="action_adh_pre_master_plant" model="ir.actions.act_window">
+			<field name="name">Master Plant</field>
+			<field name="res_model">adhimix.pre.master.plant</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>
+		<menuitem id="menu_pre_master_plant_id" name="Master Plant" action="action_adh_pre_master_plant" sequence="20" parent="base.menu_users"/>		
+		<!-- Menu Rencana Produksi -->
+		<record id="action_adh_pre_rencana_produksi" model="ir.actions.act_window">
+			<field name="name">Rencana Produksi</field>
+			<field name="res_model">adhimix.pre.rencana.produksi</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>		
+		<!-- Jadwal Rencana Produksi -->
+		<record id="action_adh_pre_rencana_produksi_cal" model="ir.actions.act_window">
+			<field name="name">Rencana Produksi</field>
+			<field name="res_model">adhimix.pre.rencana.produksi.plan</field>
+			<field name="view_mode">calendar,tree</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>
+		<!-- Menu Rencana Produksi -->
+
+		<!-- <menuitem id="menu_pre_rencana_produksi_id" name="Rencana Produksi" sequence="2" parent="mrp.menu_mrp_manufacturing"/> -->
+		<menuitem id="menu_pre_rencana_produksi_id" name="Rencana Produksi" sequence="15" parent="mrp.menu_mrp_root"/>
+		<menuitem id="menu_pre_jadwal_rencana_produksi" action="action_adh_pre_rencana_produksi_cal" name="Jadwal" sequence="1" parent="menu_pre_rencana_produksi_id"/>
+		<menuitem id="menu_pre_rencana_produksi" action="action_adh_pre_rencana_produksi" name="Rencana Produksi" sequence="2" parent="menu_pre_rencana_produksi_id"/>
+
+		<!-- Menu Realisasi Produk -->
+		<record id="action_adh_pre_realisasi_produksi" model="ir.actions.act_window">
+			<field name="name">Realisasi Produksi</field>
+			<field name="res_model">adhimix.pre.realisasi.produksi</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>
+		<menuitem id="menu_pre_realisasi_produksi" action="action_adh_pre_realisasi_produksi" name="Realisasi Produksi" sequence="3" parent="mrp.menu_mrp_manufacturing"/>
+
+		<!-- Menu Permintaan Barang -->
+		<record id="action_adh_pre_permintaan_barang" model="ir.actions.act_window">
+			<field name="name">Permintaan Barang</field>
+			<field name="res_model">adhimix.pre.permintaan.barang</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>
+		<menuitem id="menu_pre_permintaan_barang" action="action_adh_pre_permintaan_barang" name="Permintaan Barang" sequence="4" parent="mrp.menu_mrp_manufacturing"/>
+				
+		<!-- Menu Line Produksi -->
+		<record id="action_line_produksi" model="ir.actions.act_window">
+			<field name="name">Line Produksi</field>
+			<field name="res_model">adhimix.pre.line</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a Data
+              	</p>				
+			</field>
+		</record>
+		<menuitem id="menu_line_produksi" action="action_line_produksi" name="Line Produksi" sequence="100" parent="mrp.menu_mrp_bom"/>
+		 		
+		
+
+      	<!-- Menu Negosiasi -->
+	    <record id="action_adh_pre_pemasaran_negosisasi" model="ir.actions.act_window">
+      		<field name="name">Negosiasi</field>
+      		<field name="type">ir.actions.act_window</field>
+      		<field name="res_model">sale.order</field>
+      		<field name="view_type">form</field>
+      		<field name="view_mode">tree,form</field>
+      		<field name="domain">[('state','=','sent')]</field>
+      		<field name="view_id" ref="view_negosiasi_tree"/>
+      		<field name="help" type="html">
+	            <p class="oe_view_nocontent_create">
+            		Click to add
+            	</p>
+            	<p>klik tombol create untuk membuat data baru</p>
+      		</field>
+    	</record>
+        
+      	<menuitem id="menu_adh_pre_negosiasi" action="action_adh_pre_pemasaran_negosisasi" name="Negosiasi" parent="sales_team.menu_sales" sequence="10"/>
+
+     	<!-- Kontrak Manufaktur -->
+    	<!-- <record id="action_view_adh_mrp_kontrak_form" model="ir.actions.act_window">
+            <field name="name">BA &#38; Negosiasi</field>
+            <field name="res_model">adhimix.mrp.kontrak</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              	<p class="oe_view_nocontent_create">
+	                Click to add a data
+              	</p>
+            </field>
+        </record>        
+    	<menuitem id="menu_mrp_kontrak" name="BA &#38; Negosiasi" action="action_view_adh_mrp_kontrak_form" parent="sales_team.menu_sales" sequence="11"/> -->
+        		
+		<!-- Cost Control -->
+		<record id="action_adh_pre_cost_control" model="ir.actions.act_window">
+			<field name="name">Cost Control</field>
+			<field name="res_model">adhimix.pre.cost.control</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              	<p class="oe_view_nocontent_create">Click to add a Data</p>				
+			</field>
+		</record>
+		<menuitem id="menu_pre_cost_control" action="action_adh_pre_cost_control" name="Cost Control" sequence="2" parent="mrp.menu_mrp_manufacturing"/>		 		 				            
+		            		
+		<!-- SPP -->
+		<record id="action_surat_perintah_produksi" model="ir.actions.act_window">
+			<field name="name">Surat Perintah Produksi</field>
+			<field name="res_model">adhimix.pre.spp</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+             	<p class="oe_view_nocontent_create">Click to add a Data</p>				
+			</field>
+		</record>		
+		<menuitem id="menu_surat_perintah_produksi" action="action_surat_perintah_produksi" name="Surat Perintah Produksi" sequence="0" parent="mrp.menu_mrp_manufacturing"/>
+		 		
+		<!-- Kelompok Produk -->
+		<!-- <record id="action_view_adhimix_product_type" model="ir.actions.act_window">
+			<field name="name">Kelompok Produk</field>
+			<field name="res_model">adhimix.product.type</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click to add a Contact Center</p>
+				<p>klik tombol create untuk membuat data baru</p>
+			</field>
+		</record>
+		<menuitem id="menu_adhimix_product_type" name="Kelompok Produk" action="action_view_adhimix_product_type" parent="sales_team.menu_sales" sequence="99"/>	 -->		
+		
+		<!-- Level Produk -->		
+		<!-- <record id="action_view_adhimix_product_level" model="ir.actions.act_window">
+			<field name="name">Level Produk</field>
+			<field name="res_model">adhimix.product.level</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click to add a Contact Center</p>
+				<p>klik tombol create untuk membuat data baru</p>
+			</field>
+		</record>	
+		<menuitem id="menu_adhimix_product_level" name="Level Produk" action="action_view_adhimix_product_level" parent="sales_team.menu_sales" sequence="100"/>	  -->           				                                          
+		
+		<!-- Info Pasar -->
+		<record id="action_view_adh_pre_info_pasar_form" model="ir.actions.act_window">
+			<field name="name">Input Data Info Pasar</field>
+            <field name="res_model">adhimix.pre.info.pasar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_state_info_pasar':1}</field>
+            <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+            		Click to add a data
+            	</p>
+            </field>
+		</record>              
+		<menuitem id="menu_pre_info_pasar" name="Info Pasar Precast" action="action_view_adh_pre_info_pasar_form" parent="sales_team.menu_sales" sequence="7"/>
+                 
+		<record id="action_adh_pre_target_pasar" model="ir.actions.act_window">
+			<field name="name">Target Pasar Precast</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">adhimix.pre.info.pasar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','Target Pasar')]</field>
+            <field name="help" type="html">
+                  <p class="oe_view_nocontent_create">
+                  Click to add
+                  </p>
+                  <p>klik tombol create untuk membuat data baru</p>
+            </field>
+		</record>      
+      	<menuitem id="menu_pre_target_pasar" action="action_adh_pre_target_pasar" name="Target Pasar Precast" parent="sales_team.menu_sales" sequence="8"/>
+
+        <!-- Jenis Proyek -->
+        <record id="action_adh_jenis_proyek" model="ir.actions.act_window">
+			<field name="name">Jenis Proyek</field>
+			<field name="res_model">adhimix.jenis.proyek</field>
+		    <field name="view_mode">tree</field>
+		    <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">Click to add</p>
+            	<p>klik tombol create untuk membuat data baru</p>
+			</field>
+		</record>
+        <menuitem id="menu_adh_jenis_proyek" name="Jenis Proyek" parent="sales_team.menu_sale_config" action="action_adh_jenis_proyek" sequence="1"/>
+
+       	 <!-- Cara Sumber Informasi-->
+        <record id="action_adh_cara_sumber_informasi" model="ir.actions.act_window">
+			<field name="name">Cara Sumber Informasi</field>
+			<field name="res_model">adhimix.cara.sumber.informasi</field>
+		    <field name="view_mode">tree</field>
+		    <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">Click to add</p>
+            	<p>klik tombol create untuk membuat data baru</p>
+			</field>
+		</record>
+        <menuitem id="menu_adh_jenis_proyek" name="Cara Sumber Informasi" parent="sales_team.menu_sale_config" action="action_adh_cara_sumber_informasi" sequence="2"/>
+
+
+		<!-- Permintaan Estimasi -->
+		<record id="action_adh_pre_permintaan_estimasi" model="ir.actions.act_window">
+      		<field name="name">Permintaan Estimasi</field>
+      		<field name="res_model">adhimix.pre.permintaan.estimasi</field>
+       		<field name="view_type">form</field>
+      		<field name="view_mode">tree,form</field>
+      		<field name="help" type="html">
+            	<p class="oe_view_nocontent_create">Click to add</p>
+            	<p>klik tombol create untuk membuat data baru</p>
+      		</field>
+		</record>
+		<menuitem id="menu_adh_permintaan_estimasi" name="Permintaan Estimasi" parent="sales_team.menu_sale_config" action="action_adh_pre_permintaan_estimasi" sequence="2"/>
+            
+	</data>
+</odoo>
+

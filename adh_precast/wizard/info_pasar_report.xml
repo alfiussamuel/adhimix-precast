@@ -1,0 +1,276 @@
+<odoo>
+	<data>
+		<record id="view_adhimix_mrp_info_pasar_report2" model="ir.ui.view">
+			<field name="name">adhimix.mrp.info.pasar.wizard2</field>
+			<field name="model">info.pasar.wizard2</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Info Pasar">
+		            <group>
+		            	<field name="start_date"/>
+		                <!-- <field name="tanggal_informasi"/> -->
+		                <field name="end_date"/>
+		            </group>
+		            <footer>
+		                <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+		                <button string="Cancel" class="btn-default" special="cancel"/>
+		            </footer>
+		        </form>
+		    </field>
+		</record> 
+		<record id="action_view_adh_mrp_info_pasar_wizard" model="ir.actions.act_window">
+			<field name="name">Info Pasar</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">info.pasar.wizard2</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_adhimix_mrp_info_pasar_report2"/>
+			<field name="target">new</field>
+	    </record>
+	    <report
+			id="report_info_pasar_menu"
+			string="Info Pasar"
+			model="adhimix.mrp.info.pasar"
+			report_type="qweb-pdf"
+			file="adhimix.mrp.info.pasar"
+			name="adh_precast.report_infopasar"
+		/>		
+
+		<template id="report_infopasar">
+			<t t-call="report.html_container">				
+				<t t-call="report.internal_layout">
+					<!-- <t t-foreach="docs" t-as="doc"> -->
+						<div class="page">					
+							<!-- <t t-esc="nomor_info"/> -->
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td rowspan="2" class="img-responsive" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<img t-if="company_id" t-att-src="'data:image/png;base64,%s' %company_id" style="text-align:center;max-height:100px; max-width:80px;"/>
+										</td>
+										<td colspan="13" rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;">
+											<center><strong>FORM <br/>DAFTAR INFORMASI &#38; TARGET PASAR</strong></center>
+										</td>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>No. Dokumen : </strong></center>
+										</td>
+									</tr>
+									<tr>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black; vertical-align:middle;">
+											<!-- <center><t t-esc="nomor_info"/></center> -->
+										</td>
+									</tr>
+									<tr>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Revisi :</strong> </center>
+										</td>
+										<td colspan="13" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Tanggal Efektif :<t t-esc="tanggal_efektif"/> </strong></center>
+										</td>
+										<td style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;">
+											<center><strong>Hal : </strong> </center>
+										</td>
+									</tr>
+								</tbody>
+						
+							</table>
+						<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th rowspan="2" style="border-top:2px solid black;border-left:2px solid black;border-bottom:2px solid black;border-right:2px solid black;vertical-align:middle;">
+											<center>NO</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Tanggal Informasi Pasar</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle;">
+											<center>Nama Pelanggan</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle;">
+											<center>Nama/Spesifikasi Produk</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle;">
+											<center>Volume(Buah)</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle">
+											<center>Tanggal Dibutuhkan</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle;">
+											<center>Lokasi</center>
+										</th>
+										<th colspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Sumber Informasi</center>
+										</th>
+										<th colspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Contact Person</center>
+										</th>
+										<th rowspan="2" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;vertical-align:middle;">
+											<center>Status</center>
+										</th>
+										<th colspan="3" style="border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Target Pasar</center>
+										</th>
+									</tr>
+									<tr>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Dari</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Cara</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Nama</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Telepon</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Tanggal</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Ya</center>
+										</th>
+										<th style="border-top:1px solid black;border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;">
+											<center>Tidak</center>
+										</th>
+									</tr>
+									<tbody>
+										<tr t-foreach="info_pasar_ids" t-as="l">
+										<!-- <tr> -->
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:2px solid black;">
+												<t t-esc="l.name"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.tanggal_informasi" t-field-options='{"format": "d MMMM y"}'/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<!-- <t t-esc="l.nama_pelanggan.name"/> -->
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.nama_spesifikasi_produk"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.volume"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.tanggal_dibutuhkan"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.lokasi"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.sumber_informasi_dari"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.sumber_informasi_cara"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.nama"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.telepon"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.status"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.tanggal"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:1px solid black;border-left:1px solid black;">
+												<t t-esc="l.ya"/>
+											</td>
+											<td style="border-top:1px solid black;border-bottom:1px solid black;border-right:2px solid black;border-left:1px solid black;">
+												<t t-esc="l.tidak"/>
+											</td>
+										</tr>
+									</tbody>							
+								</thead>
+							</table>
+							<table class="table table-condensed" style="margin-top:-15px">
+								<tr>
+									<td style="border-bottom:1px solid white;border-top:1px solid white">
+										<strong>Status :</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										1 Terklarifikasi
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										2 Belum Terklarifikasi
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										<strong>Sumber Informasi :</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										(Dari)
+									</td>
+									<td style="border-bottom:1px solid white;border-top:1px solid white;">
+										(Cara)
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										1 Owner
+									</td>
+									<td style="border-bottom:1px solid white">
+										1 By Phone
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										2 Rekanan
+									</td>
+									<td style="border-bottom:1px solid white">
+										2 DOOR TO DOOR (Datang Langsung)
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										
+									</td>
+									<td style="border-bottom:1px solid white">
+										3 Media Elektronik
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										
+									</td>
+									<td style="border-bottom:1px solid white">
+										3 Media Cetak
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										<strong>Catatan:</strong>
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom:1px solid white">
+										Daftar informasi pasar dibuat dalam bentuk buku besar, ditulis secara harian
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					<!-- </t>				 -->
+				</t>
+			</t>			
+		</template>	
+
+	    <menuitem id="menu_mrp_info_pasar_wizard"
+		            name="Info Pasar"
+		            action="action_view_adh_mrp_info_pasar_wizard"
+		            parent="sales_team.menu_sale_report"
+		            sequence="10"/>
+
+	</data>
+</odoo>

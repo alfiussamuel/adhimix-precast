@@ -25,9 +25,6 @@ class AdhimixPreInfoPasar(models.Model):
 	tanggal_efektif = fields.Date(string="Tanggal Efektif",default=lambda self:time.strftime("%Y-%m-%d"))
 	sumber_informasi_dari = fields.Selection([('OWNER','OWNER'),('REKANAN','REKANAN'),
 											('KONSULTAN','KONSULTAN'),('KONTRAKTOR','KONTRAKTOR')],string="Dari")
-	# sumber_informasi_cara = fields.Selection([('BY PHONE','BY PHONE'),('DOOR TO DOOR','DOOR TO DOOR'),
-	# 									('MEDIA ELEKTRONIK','MEDIA ELEKTRONIK'),('MEDIA CETAK','MEDIA CETAK')],string="Cara")
-
 	sumber_informasi_cara = fields.Many2one('adhimix.cara.sumber.informasi',string="Cara")
 	nama = fields.Char(string="Nama")
 	telepon = fields.Char(string="Telepon")

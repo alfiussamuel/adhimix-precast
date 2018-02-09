@@ -1,0 +1,62 @@
+<odoo>
+	<data>
+			    				
+		<record id="product_template_only_form_view_adhimix_pre_product" model="ir.ui.view">
+	    	<field name="name">Product</field>
+	    	<field name="model">product.template</field>
+	    	<field name="type">form</field>
+	    	<field name="inherit_id" ref="product.product_template_only_form_view"/>	    	
+	    	<field name="arch" type="xml">
+	    		<field name="default_code" position="after">
+	    			<field name="bom_type"/>
+	    			<field name="jenis_produk"/>	    				    		
+	    			<!-- <field name="level_id" domain="[('level','=','3')]"/> -->
+	    		</field>
+	    	</field>
+	    </record>
+	    	      		
+		<!-- Kelompok Produk -->	    	      		
+		<!-- <record model="ir.ui.view" id="adhimix_product_type_tree_view">
+			<field name="name">Kelompok Produk</field>
+			<field name="model">adhimix.product.type</field>
+			<field name="arch" type="xml">
+				<tree string="Jenis Produk" editable="top">					
+					<field name="name" required="1"/>																										
+				</tree>
+			</field>
+		</record>		 -->			                  		
+		
+		<!-- Level Produk -->
+		<!-- <record model="ir.ui.view" id="adhimix_product_level_view">
+			<field name="name">Level Produk</field>
+			<field name="model">adhimix.product.level</field>
+			<field name="arch" type="xml">
+				<form>									
+					<sheet>										
+						<group>														
+							<field name="parent_id"/>
+							<field name="name" required="1"/>
+							<field name="uom_id" attrs="{'readonly': [('level', '!=', 2)]}"/>
+							<field name="level"/>								
+						</group>																																						
+					</sheet>
+				</form>
+			</field>
+		</record> -->
+		<!-- 
+		<record model="ir.ui.view" id="adhimix_product_level_tree_view">
+			<field name="name">Level Produk</field>
+			<field name="model">adhimix.product.level</field>
+			<field name="arch" type="xml">
+				<tree string="Level Produk">
+					<field name="parent_id"/>									
+					<field name="name"/>										
+					<field name="uom_id"/>					
+					<field name="level"/>												
+				</tree>
+			</field>
+		</record>		 -->				                          
+
+	</data>
+</odoo>
+

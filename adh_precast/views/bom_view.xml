@@ -1,0 +1,70 @@
+<odoo>
+	<data>
+		
+		<record id="mrp_bom_form_view_adhimix_pre_bom" model="ir.ui.view">
+	    	<field name="name">adhimix.pre.bom</field>
+	    	<field name="model">mrp.bom</field>
+	    	<field name="type">form</field>
+	    	<field name="inherit_id" ref="mrp.mrp_bom_form_view"/>	    	
+	    	<field name="arch" type="xml">
+	    		<xpath expr="/form/sheet/notebook/page[1]" position="attributes">
+	    			<attribute name="string">Produksi</attribute>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]/field[@name='bom_line_ids']/tree/field[@name='product_id']" position="attributes">
+	    			<attribute name="string">Nama Produk</attribute>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]/field[@name='bom_line_ids']/tree/field[@name='product_qty']" position="attributes">
+	    			<attribute name="string">Volume</attribute>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]/field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="attributes">
+	    			<attribute name="string">Satuan</attribute>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]/field[@name='bom_line_ids']/tree/field[@name='product_qty']" position="after">
+	    			<field name="price_unit"/>
+	    			<field name="koefisien"/>
+					<field name="total"/>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]/field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="after">
+	    			<field name="subtotal" sum="subtotal"/>
+	    		</xpath>
+	    		<xpath expr="/form/sheet/notebook/page[1]" position="after">
+	    			<page string="Pengiriman">
+	    				<field name="pengiriman_ids" nolabel="1">
+	    					<tree editable="top">
+	    						<field name="product_id" required="1"/>
+	    						<field name="product_qty" required="1"/>	    						
+	    						<field name="koefisien" required="1"/>
+	    						<field name="total"/>
+	    						<field name="product_uom"/>
+	    					</tree>
+	    				</field>
+	    			</page>
+	    			<page string="Stressing">
+	    				<field name="stressing_ids" nolabel="1">
+	    					<tree editable="top">
+	    						<field name="product_id" required="1"/>
+	    						<field name="product_qty" required="1"/>
+	    						<field name="koefisien" required="1"/>
+	    						<field name="total"/>
+	    						<field name="product_uom"/>
+	    					</tree>
+	    				</field>
+	    			</page>
+	    			<page string="Install">
+	    				<field name="install_ids" nolabel="1">
+	    					<tree editable="top">
+	    						<field name="product_id" required="1"/>
+	    						<field name="product_qty" required="1"/>
+	    						<field name="koefisien" required="1"/>
+	    						<field name="total"/>
+	    						<field name="product_uom"/>
+	    					</tree>
+	    				</field>
+	    			</page>
+	    		</xpath>	        	
+	      	</field>
+	    </record>
+	    				
+	</data>
+</odoo>
+

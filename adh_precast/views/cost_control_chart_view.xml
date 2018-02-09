@@ -1,0 +1,112 @@
+<odoo>
+	<data>				
+		
+		<record id="view_account_tree_chart" model="ir.ui.view">
+            <field name="name">Cost Control</field>
+            <field name="model">adhimix.pre.cost.control</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:type == 'view';black:type in ('other','receivable','payable','consolidation');gray:type == 'closed'"
+                      string="Chart of accounts" > <!--toolbar="1"-->
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="type"/>
+                    <field name="parent_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        	    
+		<record id="view_adhimix_pre_cost_control_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.cost.control.form</field>
+			<field name="model">adhimix.pre.cost.control</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Persiapan Cost Control">
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="kontrak_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="pelanggan" options="{'no_create_edit': True,'no_quick_create': True}" />
+								<field name="nama_proyek_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+							</group>
+							<group>
+								<field name="product_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="total_rap"/>
+								<field name="sisa_rap"/>
+								<field name="company_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="subkon" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="deadline_kontrak"/>
+								<field name="id_cost_control" invisible="1"/>
+							</group>
+						</group>
+						<group>
+							<notebook>
+								<page string="Detail Cost Control">
+									<group>
+										<field name="cost_control_ids" nolabel="1" readonly="1">
+											<tree>
+												<field name="reference" invisible="1"/>
+												<field name="uraian_id" readonly="1"/>
+												<field name="satuan_volume_hpp" class="oe_inline" readonly="1"/>
+												<field name="jumlah_volume_hpp" class="oe_inline" readonly="1"/>
+												<field name="total_harga_hpp" readonly="1" sum="Sub Total"/>
+												<field name="jumlah_volume_realisasi" readonly="1"/>
+												<field name="harga_realisasi" readonly="1"/>
+												<field name="total_harga_realisasi" readonly="1" sum="Sub Total"/>
+												<field name="om_biaya" invisible="1"/>
+												<field name="om_jumlah" invisible="1"/>
+											</tree>
+											<form>
+												<group>
+													<field name="name" invisible="1"/>
+													<field name="uraian_id" readonly="1"/>
+													<field name="spesifikasi" readonly="1"/>													
+												</group>
+												<group>
+													<group string="Rencana HPP">
+														<field name="jumlah_volume_hpp" class="oe_inline" readonly="1"/>
+														<field name="satuan_volume_hpp" class="oe_inline" readonly="1"/>
+														<field name="harga_hpp" class="oe_inline" readonly="1"/>
+														<field name="total_harga_hpp" class="oe_inline" readonly="1"/>
+													</group>
+													<group string="Realisasi s/d Saat Ini">
+														<field name="jumlah_volume_realisasi" class="oe_inline" readonly="1"/>
+														<field name="satuan_volume_realisasi" class="oe_inline" readonly="1"/>
+														<field name="harga_realisasi" class="oe_inline" readonly="1"/>
+														<field name="total_harga_realisasi" class="oe_inline" readonly="1"/>
+													</group>
+												</group>
+											</form>
+										</field>
+									</group>
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_adhimix_pre_cost_control_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.cost.control.tree</field>
+			<field name="model">adhimix.pre.cost.control</field>
+			<field name="type">tree</field>			
+			<field name="arch" type="xml">
+				<tree string="Persiapan Cost Control">
+					<field name="name"/>
+					<field name="pelanggan"/>
+					<field name="nama_proyek_id"/>
+					<field name="subkon"/>
+					<field name="deadline_kontrak"/>
+					<field name="id_cost_control"/>
+				</tree>
+			</field>
+		</record>		
+		
+	</data>
+</odoo>

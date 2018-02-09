@@ -1,0 +1,341 @@
+<odoo>
+	<data>
+		<record id="view_adhimix_pre_info_pasar_form" model="ir.ui.view">
+			<field name="name">adhimix.pre.info.pasar.form</field>
+			<field name="model">adhimix.pre.info.pasar</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Daftar Informasi Target Pasar">
+					<header>
+						<button name="action_analisa_pasar" string="Analisa Pasar" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'Info Pasar')]}"/>
+						<button name="action_target_pasar" string="Target Pasar" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'Analisa Pasar')]}"/>
+						<!-- <button name="button_buat_penawaran" string="Buat Penawaran" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'Target Pasar')]}"/> -->
+						<field name="state" widget="statusbar" readonly="1"/>
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="company_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="tanggal_informasi"/>
+								<field name="nama_proyek" required="1"/>
+								<!-- <field name="jenis_proyek_id" required="1"/> -->
+								<!-- <field name="nama_pelanggan" required="1"/> -->
+								<field name="nilai_proyek"/>
+							</group>
+							<group>
+								<!-- <field name="tanggal_dibutuhkan"/> -->
+								<field name="lokasi"/>
+								<field name="provinsi_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+								<field name="kota_id" options="{'no_create_edit': True,'no_quick_create': True}" />
+								<field name="sumber_dana"/>
+							</group>
+						<!-- 	<group string="Kontraktor">
+								<field name="is_kontraktor"/>
+								<field name="kontraktor_id" attrs="{'invisible':[('is_kontraktor', '=', True)]}"/>
+								<field name="nama_kontraktor" attrs="{'invisible':[('is_kontraktor', '=', False)]}"/>
+							</group> -->
+							<group string="Owner">
+								<field name="is_owner"/>
+								<field name="owner_id"  attrs="{'invisible':[('is_owner', '=', True)]}"/>
+								<field name="nama_owner" attrs="{'invisible':[('is_owner', '=', False)]}"/>
+							</group>
+							<group string="Waktu Pelaksanaan">
+								<field name="mulai"/>
+								<field name="selesai"/>
+							</group>
+							<group string="Konsultan">
+								<field name="is_konsultan"/>
+								<field name="konsultan_id" attrs="{'invisible':[('is_konsultan', '=', True)]}"/>
+								<field name="nama_konsultan" attrs="{'invisible':[('is_konsultan', '=', False)]}"/>
+							</group>
+							<group string="Contact Person">
+								<field name="nama" class="oe_inline"/>
+								<field name="telepon" class="oe_inline"/>
+							</group>
+							<group string="Sumber Informasi">
+								<field name="sumber_informasi_dari"/>
+								<field name="sumber_informasi_cara"/>
+							</group>
+							<group string="Target Pasar" attrs="{'invisible':[('state', '=', 'Info Pasar')]}">
+								<field name="tanggal_rencana_kontrak"/>
+								<field name="persentase_keyakinan" attrs="{'required':[('state', '=', 'Analisa Pasar')]}"/>
+							</group>
+							<group>
+								<field name="status"/>
+								<field name="pic"/>
+								<field name="created_by"/>														
+							</group>
+						</group>
+						<group>
+							<notebook>
+								<page string="Produk Detail">
+									<group>
+										<field name="product_detail_ids" nolabel="1">
+											<tree>
+												<!-- <field name="type_id"/> -->
+												<field name="product_id"/>
+												<field name="category_id"/>
+												<field name="produk_baru"/>
+												<!-- <field name="kelompok_id"/> -->
+												<field name="satuan_id"/>
+												<field name="harga_satuan"/>
+												<field name="vol_market_size"/>
+												<field name="total_market_size"/>
+												<field name="vol_market_share"/>
+												<field name="total_market_share"/>
+												<field name="estimasi_biaya" widget="monetary"/>
+												<!-- <field name="estimasi_id"/> -->
+												<!-- <field name="status_estimasi"/> -->
+												<button name="button_estimasi" string="Permintaan Estimasi" type="object"/>
+												<!-- <button name="action_estimasi" string="Estimasi" icon="fa-arrow-right" class="oe_highlight" type="object"/> -->
+											</tree>
+											<form>
+												<group>
+													<!-- <field name="type_id"/> -->
+													<field name="is_product"/>
+													<field name="category_id" options="{'no_create_edit': True,'no_quick_create': True}"/>
+													<field name="product_id" attrs="{'invisible':[('is_product', '=', True)]}" options="{'no_create_edit': True,'no_quick_create': True}"/>
+													<field name="produk_baru" attrs="{'invisible':[('is_product', '=', False)]}"/>
+													<field name="bom_id"  attrs="{'invisible':[('is_product', '=', True)]}" />
+													<!-- <field name="kelompok_id"/> -->
+													<field name="satuan_id" class="oe_inline"/>				
+												</group>
+												<group>
+													<group>
+														<field name="harga_satuan"/>
+														<field name="vol_market_size"/>
+														<field name="vol_market_share"/>
+													</group>
+													<group>														
+														<field name="total_market_size"/>
+														<field name="total_market_share"/>	
+														<field name="estimasi_biaya" widget="monetary"/>
+													</group>
+												</group>												
+												<notebook>
+													<page string="Detail Permintaan Estimasi">
+														<group>
+															<field name="estimasi_ids" nolabel="1" readonly="1">
+																<tree>
+																	<field name="estimasi_id"/>
+																	<field name="status_estimasi"/>
+																</tree>
+															</field>
+														</group>
+													</page>
+												</notebook>
+											</form>
+										</field>
+									</group>
+									<group>
+						                <group class="oe_subtotal_footer oe_right">
+						                  <div class="oe_subtotal_footer_separator oe_inline">
+						                      <label for="grand_total"/>
+						                    </div> 
+						                    <field name="grand_total" class="oe_subtotal_footer_separator" nolabel="1" readonly="1"/>
+						                </group> 
+						            </group>
+								</page>
+								<page string="Kontraktor">
+									<group>
+										<field name="kontraktor_ids" nolabel="1">
+											<form>
+												<group>
+													<field name="is_kontraktor"/>
+													<field name="kontraktor_id" attrs="{'invisible':[('is_kontraktor', '=', True)]}"/>
+													<field name="nama_kontraktor" attrs="{'invisible':[('is_kontraktor', '=', False)]}"/>
+												</group>
+											</form>
+											<tree>
+												<!-- <field name="is_kontraktor"/> -->
+												<field name="kontraktor_id"/>
+												<field name="nama_kontraktor"/>
+												<button name="button_buat_penawaran" string="Buat Penawaran" type="object"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Analisa Pasar"  attrs="{'invisible':[('state', '=', 'Info Pasar')]}">
+									<from>
+										<group>
+											<group>
+					                           	<field name="kep_owner" widget="radio"/>
+					                        </group>
+					                        <group>
+					                           	<field name="ket_owner"/>
+						                    </group>
+						                </group>
+					                    <group>
+					                    	<group>
+				                           		<field name="kep_sumber_dana" widget="radio"/>
+				                           	</group>
+				                           	<group>
+				                           		<field name="ket_status_bayar"/>
+				                           </group>
+					                    </group>
+					                    <group>
+					                    	<group>
+				                           		<field name="modal_kerja"/>
+		                           				<field name="kep_modal_kerja" widget="radio"/>
+				                           	</group>
+				                           	<group>
+				                           		<field name="ket_modal_kerja"/>
+				                           </group>
+					                    </group>
+					                    <group>
+					                    	<group>
+				                           		<label for="pelaksanaaan_mulai" string="Pelaksanaan"/>
+						                        <div class="o_row">
+						                            <field name="pelaksanaaan_mulai"/>
+						                            <label for="pelaksanaaan_mulai" string="s/d"/><field name="pelaksanaaan_selesai"/>
+						                        </div>
+						                        <field name="kep_mulai" widget="radio"/>
+				                           	</group>
+				                           	<group>
+				                           		<field name="ket_mulai"/>
+				                           </group>
+					                    </group>
+					                    <group>
+					                    	<group>
+				                           		<field name="kategori_proyek"/>
+		                           				<field name="kep_kategori_proyek" widget="radio"/>
+				                           	</group>
+				                           	<group>
+				                           		<field name="ket_kategori_proyek"/>
+				                           </group>
+					                    </group>
+					                    <group>
+					                    	<group>
+				                           		<field name="spesifikasi_khusus"/>
+		                           				<field name="kep_kategori_proyek" widget="radio"/>
+				                           	</group>
+				                           	<group>
+				                           		<field name="ket_kategori_proyek"/>
+				                           </group>
+					                    </group>
+					                    <group>
+										 	<field name="keputusan_akhir" widget="radio"/>
+										 </group>
+					                </from>
+					            </page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- Kanban -->
+		 <record id="adh_pre_info_pasar_kanban_view" model="ir.ui.view">
+            <field name="name">adhimix.pre.info.pasar.kanban.view</field>
+            <field name="model">adhimix.pre.info.pasar</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column o_opportunity_kanban" edit="false">
+                    <field name="state" />
+                    <field name="color"/>
+                    <field name="nama_proyek"/>
+                    <field name="tanggal_rencana_kontrak"/>
+                    <field name="kanban_state"/>
+                    <field name="pic"/>
+                    <field name="active"/>
+                    <field name="company_currency"/>
+                    <templates>
+                        <field name="tanggal_rencana_kontrak"/>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+                                        <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
+                                        <li t-if="! record.active.value"><a name="action_set_active" type="object">Unarchive</a></li>
+                                        <li t-if="record.active.value"><a name="action_set_unactive" type="object">Archive</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <strong><field name="name"/></strong>
+                                         <field name="nama_proyek"/>
+                                    </div>
+                                    <div class="text-muted">
+                                        <t t-if="record.tanggal_rencana_kontrak.raw_value"><field name="tanggal_rencana_kontrak" widget="monetary" options="{'currency_field': 'company_currency'}"/><span t-if="record.partner_id.value">,</span></t> <span t-if="record.pic.value"> <t t-esc="record.pic.value"/></span>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- search -->
+        <record id="adhimix_pre_info_pasar_search" model="ir.ui.view">
+            <field name="name">adhimix.pre.info.pasar.search</field>
+            <field name="model">adhimix.pre.info.pasar</field>
+            <field name="arch" type="xml">
+                <search string="Search Info Pasar">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <separator/>
+                       <group expand="0" string="Group By...">
+                          <filter string="Status" name='group_by_state' icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                      </group>
+                      <filter string="Info Pasar" name="state_info_pasar" domain="[('state','=','Info Pasar')]"/>
+                </search>
+            </field>
+        </record>
+
+		<record id="view_adhimix_pre_info_pasar_tree" model="ir.ui.view">
+			<field name="name">adhimix.pre.info.pasar.tree</field>
+			<field name="model">adhimix.pre.info.pasar</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Daftar Informasi Target Pasar">
+					<field name="name"/>
+					<field name="nama_proyek"/>
+					<field name="tanggal_informasi"/>
+					<field name="pic"/>
+					<field name="created_by"/>	
+					<field name="nilai_proyek" sum="Total Nilai"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<!--Form Jenis Proyek  -->
+		<record id="view_adhimix_jenis_proyek_tree" model="ir.ui.view">
+	        <field name="view_name">adhimix.jenis.proyek.tree</field>
+	        <field name="model">adhimix.jenis.proyek</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="8"/>
+	        <field name="arch" type="xml">
+	          <tree editable="bottom">
+	            <field name="name"/>
+	            <field name="description"/>
+	          </tree>
+	        </field>
+      	</record>
+
+      	<!--Form Cara Sumber Informasi -->
+		<record id="view_adhimix_cara_sumber_informasi_tree" model="ir.ui.view">
+	        <field name="view_name">adhimix.cara.sumber.informasi.tree</field>
+	        <field name="model">adhimix.cara.sumber.informasi</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="8"/>
+	        <field name="arch" type="xml">
+	          <tree editable="bottom">
+	            <field name="name"/>
+	            <field name="description"/>
+	          </tree>
+	        </field>
+      	</record>
+	</data>
+</odoo>
